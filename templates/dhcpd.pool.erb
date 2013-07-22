@@ -1,34 +1,34 @@
 #################################
-# <%= name network mask %>
+# <%= @name @network @mask %>
 #################################
-subnet <%= network %> netmask <%= mask %> {
+subnet <%= @network %> netmask <%= @mask %> {
   pool
   {
 <% if failover != '' -%>
-    failover peer "<%= failover %>";
+    failover peer "<%= @failover %>";
 <% end -%>
-<% range.each do |r| -%>
+<% @range.each do |r| -%>
     range <%= r %>;
 <% end -%>
   }
 
-  option subnet-mask <%= mask %>;
-<% if gateway != '' -%>
-  option routers <%= gateway %>;
+  option subnet-mask <%= @mask %>;
+<% if @gateway != '' -%>
+  option routers <%= @gateway %>;
 <% end -%>
-<% if options.is_a? Array -%>
-<%   options.each do |opt| -%>
+<% if @options.is_a? Array -%>
+<%   @options.each do |opt| -%>
   option <%= opt %>;
 <%   end -%>
-<% elsif options != '' -%>
-  option <%= options %>;
+<% elsif @options != '' -%>
+  option <%= @options %>;
 <% end -%>
-<% if parameters.is_a? Array -%>
-<%   parameters.each do |param| -%>
+<% if @parameters.is_a? Array -%>
+<%   @parameters.each do |param| -%>
   <%= param %>;
 <%   end -%>
-<% elsif parameters != '' -%>
-  <%= parameters %>;
+<% elsif @parameters != '' -%>
+  <%= @parameters %>;
 <% end -%>
 }
 
