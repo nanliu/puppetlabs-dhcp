@@ -9,10 +9,10 @@ use-host-decl-names on;
 
 # Key from bind
 include "<%= key %>";
-<% domains.each do |dom| -%>
+<% @domains.each do |dom| -%>
 zone <%= dom %>. {
-  primary <%= zonemaster %>;
-  key <%= key.split('/').last %>;
+  primary <%= @zonemaster %>;
+  key <%= @key.split('/').last %>;
 }
 
 <% end -%>
