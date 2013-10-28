@@ -124,4 +124,17 @@ class dhcp (
 
   include dhcp::monitor
 
+  @firewall { '201 accept DHCP Port 67 connections':
+    port   => 67,
+    proto  => udp,
+    action => accept,
+    state  => ['NEW'],
+  }
+
+  @firewall { '202 accept DHCP Port 68 connections':
+    port   => 68,
+    proto  => udp,
+    action => accept,
+    state  => ['NEW'],
+  }
 }
