@@ -8,7 +8,8 @@ class dhcp::failover (
   $mclt                = '300',
   $load_split          = '128',
   $load_balance        = '3',
-  $omapi_key           = ''
+  $omapi_key           = '',
+  $interface           = 'eth0',
 ) {
 
   include dhcp::params
@@ -19,4 +20,19 @@ class dhcp::failover (
     content => template('dhcp/dhcpd.conf.failover.erb'),
   }
 
+  @firewall { '301 accept DHCP Failover Port 519 UDP connections':
+    port    => $port,
+    proto   => udp,
+    action  => accept,
+    source  => $peer_address,
+    iniface => $interface,
+  }
+
+  @firewall { '302 accept DHCP Failover Port 519 TCP connections':
+    port    => $port,
+    proto   => tcp,
+    action  => accept,
+    source  => $peer_address,
+    iniface => $interface,
+  }
 }
