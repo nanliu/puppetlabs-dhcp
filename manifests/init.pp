@@ -76,7 +76,7 @@ class dhcp (
 
   # Using DDNS will require a dhcp::ddns class composition, else, we should
   # turn it off.
-  unless ( $ddns ) {
+  if ! $ddns {
     class { "dhcp::ddns": enable => false; }
   }
 
